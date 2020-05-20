@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const port = 4000;
 
@@ -6,7 +7,14 @@ const { checkUser } = require("./middlewares/checkUser");
 const { logging } = require("./middlewares/logging");
 const { homeController } = require("./controllers/homeController");
 
-
+const testDB = async () => {
+    const result = await mongoose.connect('mongodb://localhost/skillshape', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    console.log("testDB -> result", result)
+}
+testDB();
 // const checkUser = (req,res,next) => {
 //     console.log("User is approved");
 //     next();
