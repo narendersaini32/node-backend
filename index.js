@@ -7,14 +7,57 @@ const { checkUser } = require("./middlewares/checkUser");
 const { logging } = require("./middlewares/logging");
 const { homeController } = require("./controllers/homeController");
 
-const testDB = async () => {
-    const result = await mongoose.connect('mongodb://localhost/skillshape', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    console.log("testDB -> result", result)
-}
-testDB();
+// //Set up default mongoose connection
+const mongoDB = 'mongodb://127.0.0.1/biasoffer';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// //Get the default connection
+const db = mongoose.connection;
+
+// //Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+db.once('open', function () {
+    console.log("mongo db connected");
+});
+
+const schema = new mongoose.Schema({ name: 'string', size: 'string', age: "number" });
+const banners = mongoose.model('banners', schema);
+// banners.find({}).exec((error, result) => {
+//     console.log("error", error);
+//     console.log("result is", result);
+// })
+
+// banners.find({ title: "3" }).exec((error, result) => {
+//     console.log("error", error);
+//     console.log("result is", result);
+// });
+
+// db.collection("banners").insertOne({
+//     title: "5",
+//     affiliate: "normal url", size: 3
+// }, (err, res) => {
+//     console.log("err,res", err, res)
+// })
+
+// db.collection("banners").updateOne({
+//     title: "1111",
+// },{$set:{title:"0000000"}}, (err, res) => {
+//     console.log("err,res", err, res)
+// })
+
+// db.collection("banners").deleteMany({
+//     title: "5",
+// }, (err, res) => {
+//     console.log("err,res", err, res)
+// })
+
+
+// db.collection("banners").deleteOne({
+//     title: "5",
+// }, (err, res) => {
+//     console.log("err,res", err, res)
+// })
 // const checkUser = (req,res,next) => {
 //     console.log("User is approved");
 //     next();
