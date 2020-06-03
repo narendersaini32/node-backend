@@ -72,7 +72,14 @@ const banners = mongoose.model('banners', schema);
 //     res.send("Home Route")
 // }); 
 
-
+// banners.create({
+//         title: "5",
+//         affiliate: "normal url", size: {a:"a"}
+//     },
+//     (err, res) => {
+//             console.log("err,res", err, res)
+//         } 
+//     );
 // moved to controller
 app.get('/', logging, checkUser, homeController);
 
