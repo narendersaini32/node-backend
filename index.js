@@ -21,7 +21,7 @@ db.once('open', function () {
     console.log("mongo db connected");
 });
 
-const schema = new mongoose.Schema({ name: 'string', size: 'string', age: "number" });
+const schema = new mongoose.Schema({ title: 'string', size: 'string', age: "number" });
 const banners = mongoose.model('banners', schema);
 // banners.find({}).exec((error, result) => {
 //     console.log("error", error);
@@ -72,14 +72,21 @@ const banners = mongoose.model('banners', schema);
 //     res.send("Home Route")
 // }); 
 
-// banners.create({
-//         title: "5",
-//         affiliate: "normal url", size: {a:"a"}
-//     },
-//     (err, res) => {
-//             console.log("err,res", err, res)
-//         } 
-//     );
+// db.collection("banners").insertOne({
+//     title: "5",
+//     affiliate: "normal url", size: 3
+// }, (err, res) => {
+//     console.log("err,res", err, res)
+// })
+
+banners.create({
+        title: "5",
+        affiliate: "normal url", size:"randomStringTest2"
+    },
+    (err, res) => {
+            console.log("err,res", err, res)
+        } 
+    );
 // moved to controller
 app.get('/', logging, checkUser, homeController);
 
