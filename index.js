@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const cors = require('cors');
+
 const app = express();
 const port = 4000;
 
@@ -9,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(cors());
 
 const { checkUser } = require("./middlewares/checkUser");
 const { logging } = require("./middlewares/logging");
