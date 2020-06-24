@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
     title: 'string',
-    image: 'string',
+    imageLink: 'string',
     desc: "string",
     createdAt: "string"
 });
