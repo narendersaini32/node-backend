@@ -28,6 +28,32 @@ const registerController = async (req, res) => {
 
 }
 
+const loginController = async (req, res) =>{
+    try{
+        const { data } = req.body;
+        const { email,password } = data;
+        const userList = await User.find({ email });
+
+        if(userList.length){
+            const {password:storedPass} = userList[0];
+            const result = await bcrypt.compare(password, storedPass);
+            res.send({
+                success: result,
+                message: result ? "Login successfully" : "Password not correct"
+            });
+        }else{
+            res.send({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+    }catch(error){
+        res.send("An error is occurred. Please Try again.")
+    }
+
+}
 module.exports = {
-    registerController
+    registerController,
+    loginController
 }

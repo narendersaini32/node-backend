@@ -16,7 +16,7 @@ app.use(cors());
 const { checkUser } = require("./middlewares/checkUser");
 const { logging } = require("./middlewares/logging");
 const { addBannerController, findBannerController } = require("./controllers/bannerController");
-const { registerController } = require("./controllers/userController");
+const { registerController, loginController } = require("./controllers/userController");
 // const { homeController } = require("./controllers/homeController");
 
 // // //Set up default mongoose connection
@@ -130,6 +130,8 @@ app.post('/add/banner', addBannerController);
 app.post("/find/banner", findBannerController);
 
 app.post("/register", registerController);
+
+app.post("/login", loginController);
 
 app.use((req, res, next) => {
     console.log("Is user approved");
